@@ -71,6 +71,7 @@
             $nazov_firmy = $row['nazov_firmy'];
             $ico = $row['ico'];
             $dic = $row['dic'];
+            $firmy_id = $row['firmy_id'];
 
             echo "<tr>";
             echo "<td> {$nazov_firmy} </td>";        //double bracket is because of double quotes, single quotes wont work
@@ -81,9 +82,10 @@
             //!!! passing parameter to browser after click
             //tuto bude treba uviest iba novu funkciu ktora sa zavola a deletne zaznam s danym ID
 
-            echo "<td><a href='show_firmy.php?detail={$ico}'>Detail</a></td>";
-            echo "<td><a href='show_firmy.php?edit={$ico}'>Edit</a></td>";
-            echo "<td><a href='show_firmy.php?delete={$ico}'>Delete</a></td>";
+            echo "<td><a href='show_firmy.php?detail={$firmy_id}'>Detail</a></td>";
+            echo "<td><a href='fin_den_firmy.php?firmy_id={$firmy_id}'>Finančný denník</a></td>";
+            echo "<td><a href='show_firmy.php?edit={$firmy_id}'>Edit</a></td>";
+            echo "<td><a href='show_firmy.php?delete={$firmy_id}'>Delete</a></td>";
             echo "</tr>";
         }
     }

@@ -7,6 +7,11 @@
                        style="font-weight: bold;display: inline;"
                        value="Close"
                        onclick="closeMe()">
+        <!-- back butn -->
+        <input type="button" class="btn btn-success"
+        style="font-weight: bold;display: inline;"
+        value="Back"
+        onclick="window.history.go(-1)">
     </ul>  
 </nav>       
     <div id="page-wrapper"> 

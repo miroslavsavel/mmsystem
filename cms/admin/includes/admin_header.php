@@ -23,6 +23,8 @@ if (!isset($_SESSION['loggedin'])) {
 <?php include "../admin/php/schvalenie_vykazu/fnc_schvalenie_vykazu.php" ?>
 <!-- funkcie pre zobrazenie financneho denniku zamestnanca-->
 <?php include "functions_fin_den.php" ?>
+<!-- funkcie pre zobrazenie financneho denniku firmy-->
+<?php include "functions_fin_den_firmy.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">

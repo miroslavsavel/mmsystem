@@ -251,3 +251,16 @@ CREATE TABLE fin_den_zam (
     FOREIGN KEY (cislo_zamestnanca) REFERENCES zamestnanci(cislo_zamestnanca),
     FOREIGN KEY (schvalene_vykazy_id) REFERENCES schvalene_vykazy(schvalene_vykazy_id)
 );
+
+
+CREATE TABLE fin_den_firmy (
+    id_fin_den_firmy int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firmy_id int,
+    schvalene_vykazy_id int,
+    suma DECIMAL(6,3),
+    typ_zaznamu ENUM('false', 'true') NOT NULL DEFAULT 'false',
+    dat_ins DATETIME,
+    pozn varchar(200),
+    FOREIGN KEY (firmy_id) REFERENCES firmy(firmy_id),
+    FOREIGN KEY (schvalene_vykazy_id) REFERENCES schvalene_vykazy(schvalene_vykazy_id)
+);

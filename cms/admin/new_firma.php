@@ -11,7 +11,7 @@
 </nav>       
     <div id="page-wrapper"> 
         <h1 class="page-header">
-            Pridanie nového zamestnanca.
+            Pridanie novej firmy.
         </h1>
         <?php insert_firma(); ?> 
         <form action="" method="post">

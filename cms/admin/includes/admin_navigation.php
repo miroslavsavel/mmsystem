@@ -12,7 +12,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li>
-                    <a href="../index.php">Home</a>
+                    <a href="index.php">Home</a>
                 </li>          
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Prihlásený ako: <?=$_SESSION['name']?> <b class="caret"></b></a> -->
@@ -101,6 +101,35 @@
                             </li>
                             <li>
                                 <a target="_blank" href="new_firma.php" id="myLink4">Pridať novú firmu</a>
+                                <script>
+                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
+                                    document.getElementById("myLink4").onclick = function(){
+                                        //var winPop = window.open(this.href);
+                                        var win = window.open(this.href, "_blank", strWindowFeatures);
+                                        return false;
+                                    }
+                                </script>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Faktúry -->
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#faktury_dropdown"><i class="fa fa-folder"></i> Faktúry <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="faktury_dropdown" class="collapse">
+                            <li>
+                                <a target="_blank" href="show_faktury.php" id="myLink3">Prezerať faktúry</a>
+                                <script>
+                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
+                                    document.getElementById("myLink3").onclick = function(){
+                                        //var winPop = window.open(this.href);
+                                        var win = window.open(this.href, "_blank", strWindowFeatures);
+                                        return false;
+                                    }
+                                </script>
+                            </li>
+                            <li>
+                                <a target="_blank" href="new_firma.php" id="myLink4">Vytvoriť novú faktúru</a>
                                 <script>
                                     var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
                                     document.getElementById("myLink4").onclick = function(){

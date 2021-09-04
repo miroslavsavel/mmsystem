@@ -1,0 +1,1 @@
+<!-- Activate the users account with a unique code (email activation). -->

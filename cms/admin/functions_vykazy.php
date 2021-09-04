@@ -290,7 +290,7 @@
             //tuto bude treba uviest iba novu funkciu ktora sa zavola a deletne zaznam s danym ID
 
             echo "<td><a href='vykazy.php?detail={$wait_vykazy_id}'>Detail</a></td>";
-            echo "<td><a href='vykazy.php?edit={$wait_vykazy_id}'>Edit</a></td>";
+            echo "<td><a href='vykazy.php?edit={$wait_vykazy_id}'>Schválenie výkazu</a></td>";
             echo "<td><a href='vykazy.php?delete={$wait_vykazy_id}'>Delete</a></td>";
             echo "</tr>";
         }

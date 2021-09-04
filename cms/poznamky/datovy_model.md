@@ -1,3 +1,7 @@
+# triggre pre vlozenie do fin_den_zam a fin_den_firmy
+najdes vo workbenchi pod tabulkou schvalene_vykazy_zamestnanci
+
+
 # wait_vykazy------------------------------------------
 tu je ulozeny vykaz cakajuci na schvalenie
 
@@ -16,3 +20,13 @@ priezvisko
 suma
 typ_zaznamu
 dat_ins
+
+# accounts
+tu su ulozene prihlasovacie udaje do systemu
+
+# fin_den_zam
+tu vklada trigger spusteny po inserte do schvalene_vykazy_zamestnanci
+
+# fin_den_firmy
+tu vklada trigger spusteny po inserte do schvalene_vykazy_zamestnanci
+jednotlive faktury? pre firmy

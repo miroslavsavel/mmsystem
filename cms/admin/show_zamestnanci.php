@@ -3,7 +3,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <ul class="nav navbar-right top-nav">
         <!-- Button fro closing form -->
-        <input type="button" class="btn btn-success"
+        <input type="button" class="btn btn-danger"
                        style="font-weight: bold;display: inline;"
                        value="Close"
                        onclick="closeMe()">

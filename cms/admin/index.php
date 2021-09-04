@@ -15,8 +15,18 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Vítajte v administrátorskej sekcii
-                            <!-- <small>Author</small> -->
                         </h1>
+                        <h2 class="lead">
+                        <small>Novinky a zmeny:</small>
+                        </h2>
+                        <p class="lead">
+                            <!-- dorobit aby to tahalo z db -->
+                            24.8.2021 - pridaná funkcionalita schválenia pracovného výkazu
+                        </p>
+                        <p class="lead">
+                            <!-- dorobit aby to tahalo z db -->
+                            25.8.2021 - pridaná funkcionalita finančného denníku pri rozkliknutí prezerať zamestnancov
+                        </p>
                     </div>
                 </div>
                 <!-- /.row -->

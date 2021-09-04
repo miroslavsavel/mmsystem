@@ -1,19 +1,20 @@
 delimiter //
 
-DROP TRIGGER IF EXISTS fin_den_zam_insert;
+DROP TRIGGER IF EXISTS fin_den_firmy_insert;
 
-CREATE TRIGGER fin_den_zam_insert
+CREATE TRIGGER fin_den_firmy_insert
 AFTER INSERT
    ON schvalene_vykazy_zamestnanci FOR EACH ROW
 
 BEGIN
 
-    DECLARE koef_platu DECIMAL(6,3);
+    DECLARE koef_taxa DECIMAL(6,3);
     DECLARE prip_sobota DECIMAL(6,3);
     DECLARE prip_nedela DECIMAL(6,3);
     DECLARE prip_noc DECIMAL(6,3);
     DECLARE prip_sviatok DECIMAL(6,3);
-    DECLARE koef_km DECIMAL(6,3);
+    DECLARE vybrane_id_firmy INT;
+
     DECLARE suma DECIMAL(6,3);
     DECLARE dat_ins DATETIME;
     DECLARE pozn VARCHAR(200);
@@ -32,15 +33,27 @@ BEGIN
     DECLARE suma_prip_sobota_sviatok_noc DECIMAL(6,3);
     DECLARE suma_prip_nedela_sviatok_noc DECIMAL(6,3);
 
-    #--tu si vyberiem koeficienty pre daneho zamestnanca
+
+    #--tu si vyberiem ID firmy zo schvalene_vykazi_zamestnanci
+    #-- select DISTINCT firma from schvalene_vykazy where schvalene_vykazy_id == NEW.schvalene_vykazy_id
     SELECT DISTINCT
-        Z.koef_platu, Z.priplatok_sobota, Z.priplatok_nedela, Z.priplatok_noc, Z.priplatok_sviatok, Z.koef_km
+        firmy_id
+    INTO
+        vybrane_id_firmy
+	FROM
+		schvalene_vykazy
+    WHERE
+        schvalene_vykazy_id = NEW.schvalene_vykazy_id;
+
+    #--tu si vyberiem koeficienty pre danu firmu
+    SELECT DISTINCT
+        F.bezna_taxa, F.priplatok_sobota, F.priplatok_nedela, F.priplatok_noc, F.priplatok_sviatok
     INTO 
-        koef_platu, prip_sobota, prip_nedela, prip_noc, prip_sviatok, koef_km
+        koef_taxa, prip_sobota, prip_nedela, prip_noc, prip_sviatok
     FROM 
-        zamestnanci Z
+        firmy F
     WHERE  
-        Z.cislo_zamestnanca = NEW.cislo_zamestnanca_id;   #--tuto je chyba!!!!! ma problem s tymto nacitanim do obsahu premennych
+        F.firmy_id = vybrane_id_firmy;   #--tuto je chyba!!!!! ma problem s tymto nacitanim do obsahu premennych
         #--vyskusaj to s napevno zadanym 111 ako select
         
 
@@ -59,7 +72,7 @@ BEGIN
                                             NEW.hod_sobota_noc + NEW.hod_nedela_noc + NEW.hod_sviatok_noc +
                                             NEW.hod_sobota_sviatok + NEW.hod_nedela_sviatok + NEW.hod_sobota_sviatok_noc +
                                             NEW.hod_nedela_sviatok_noc);
-    SET suma_std_hod := pocet_std_hod * koef_platu;
+    SET suma_std_hod := pocet_std_hod * koef_taxa;
     #--hodiny ktore sa nasobia iba prip_noc
     SET suma_prip_noc := NEW.hod_noc * prip_noc;
     #--priplatok za pracu iba v sobot
@@ -83,20 +96,20 @@ BEGIN
     #--priplatok za pracu v nedela + sviatok + noc 
     SET suma_prip_nedela_sviatok_noc := NEW.hod_nedela_sviatok_noc * (prip_nedela + prip_sviatok + prip_noc);                            
 
-    SET suma := suma_std_hod + suma_prip_noc + suma_prip_sobota + suma_prip_nedela + suma_prip_sviatok + 
+    #--doplneny o pocet_hod*koef
+    SET suma := NEW.pocet_hodin*koef_taxa +
+                    suma_std_hod + suma_prip_noc + suma_prip_sobota + suma_prip_nedela + suma_prip_sviatok + 
                     suma_prip_sobota_noc + suma_prip_nedela_noc + suma_prip_sviatok_noc + suma_prip_sobota_sviatok +
                     suma_prip_nedela_sviatok + suma_prip_sobota_sviatok_noc + suma_prip_nedela_sviatok_noc;
     SET pozn := 'Vygenerované zo schváleného výkazu';
    
 
 
-  INSERT INTO fin_den_zam
+  INSERT INTO fin_den_firmy
                 (
-                    id_fin_den_zam,
-                    cislo_zamestnanca, 
-                    schvalene_vykazy_id, 
-                    meno, 
-                    priezvisko, 
+                    id_fin_den_firmy,
+                    firmy_id, 
+                    schvalene_vykazy_id,  
                     suma, 
                     typ_zaznamu,
                     dat_ins,
@@ -105,10 +118,8 @@ BEGIN
          VALUES 
                 (
                     NULL,
-                    NEW.cislo_zamestnanca_id, 
+                    vybrane_id_firmy, 
                     NEW.schvalene_vykazy_id, 
-                    NEW.meno,
-                    NEW.priezvisko,
                     suma,
                     true,
                     dat_ins, 
