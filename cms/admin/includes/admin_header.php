@@ -25,7 +25,10 @@ if (!isset($_SESSION['loggedin'])) {
 <?php include "functions_fin_den.php" ?>
 <!-- funkcie pre zobrazenie financneho denniku firmy-->
 <?php include "functions_fin_den_firmy.php" ?>
-
+<!-- funkcie pre vytvorenie fakturyy-->
+<?php include "functions_faktury.php" ?>
+<!-- funkcie pre zobrazenie vytvorenych faktur-->
+<?php include "functions_vytvorene_faktury.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,5 +69,6 @@ if (!isset($_SESSION['loggedin'])) {
 <!--     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen"
      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css"> -->
+     <?php require_once './vendor/autoload.php'; ?>
 
 </head>

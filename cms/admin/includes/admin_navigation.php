@@ -54,7 +54,7 @@
                                 <!-- <a href="zamestnanci.php">Prezerať zamestnancov</a> -->
                                 <a target="_blank" href="show_zamestnanci.php" id="myLink1">Prezerať zamestnancov</a>
                                 <script>
-                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
+                                    var strWindowFeatures = "location=yes,height=1200,width=1200,scrollbars=yes,status=yes";
                                     document.getElementById("myLink1").onclick = function(){
                                         //var winPop = window.open(this.href);
                                         var win = window.open(this.href, "_blank", strWindowFeatures);
@@ -73,7 +73,7 @@
                                 <!-- https://stackoverflow.com/questions/11000967/best-practice-for-js-window-open-in-href-or-in-onclick -->
                                 <a target="_blank" href="new_zamestnanec.php" id="myLink2">Pridať nového zamestnanca</a>
                                 <script>
-                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
+                                    var strWindowFeatures = "location=yes,height=1200,width=1200,scrollbars=yes,status=yes";
                                     document.getElementById("myLink2").onclick = function(){
                                         //var winPop = window.open(this.href);
                                         var win = window.open(this.href, "_blank", strWindowFeatures);
@@ -91,7 +91,7 @@
                             <li>
                                 <a target="_blank" href="show_firmy.php" id="myLink3">Prezerať firmy</a>
                                 <script>
-                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
+                                    var strWindowFeatures = "location=yes,height=0,width=0,scrollbars=yes,status=yes";
                                     document.getElementById("myLink3").onclick = function(){
                                         //var winPop = window.open(this.href);
                                         var win = window.open(this.href, "_blank", strWindowFeatures);
@@ -102,7 +102,7 @@
                             <li>
                                 <a target="_blank" href="new_firma.php" id="myLink4">Pridať novú firmu</a>
                                 <script>
-                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
+                                    var strWindowFeatures = "location=yes,height=1200,width=1200,scrollbars=yes,status=yes";
                                     document.getElementById("myLink4").onclick = function(){
                                         //var winPop = window.open(this.href);
                                         var win = window.open(this.href, "_blank", strWindowFeatures);
@@ -118,27 +118,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#faktury_dropdown"><i class="fa fa-folder"></i> Faktúry <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="faktury_dropdown" class="collapse">
                             <li>
-                                <a target="_blank" href="show_faktury.php" id="myLink3">Prezerať faktúry</a>
-                                <script>
-                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
-                                    document.getElementById("myLink3").onclick = function(){
-                                        //var winPop = window.open(this.href);
-                                        var win = window.open(this.href, "_blank", strWindowFeatures);
-                                        return false;
-                                    }
-                                </script>
+                                <a href="faktury.php">Prezerať faktúry</a>
                             </li>
                             <li>
-                                <a target="_blank" href="new_firma.php" id="myLink4">Vytvoriť novú faktúru</a>
-                                <script>
-                                    var strWindowFeatures = "location=yes,height=900,width=900,scrollbars=yes,status=yes";
-                                    document.getElementById("myLink4").onclick = function(){
-                                        //var winPop = window.open(this.href);
-                                        var win = window.open(this.href, "_blank", strWindowFeatures);
-                                        return false;
-                                    }
-                                </script>
-                                
+                                <a href="vykazy.php">Vytvoriť novú faktúru</a>
                             </li>
                         </ul>
                     </li>

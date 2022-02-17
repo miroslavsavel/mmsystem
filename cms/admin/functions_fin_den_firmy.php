@@ -6,7 +6,7 @@
             $firmy_id = $_REQUEST['firmy_id'];
 
             //id transakcie, nazov akcie, datum akcie, suma, vyfakturovana praca
-            $query = "SELECT F.id_fin_den_firmy, S.nazov_akcie, S.akcia_dat, F.suma, F.typ_zaznamu 
+            $query = "SELECT F.id_fin_den_firmy, S.nazov_akcie, S.akcia_dat, F.cislo_zamestnanca_id, F.suma, F.typ_zaznamu 
             FROM fin_den_firmy F
             INNER JOIN schvalene_vykazy S ON S.schvalene_vykazy_id = F.schvalene_vykazy_id
             INNER JOIN firmy Fi ON S.firmy_id = Fi.firmy_id
@@ -15,13 +15,16 @@
             //join na firmy
             $select_fin_den_firmy = mysqli_query($connection, $query);
             
-            //select meno zamestnanca
-            //fin_den_firmy join schvalene_vykazy_id join schvalene_vykazy_zamestnanci
     
             echo "<tr>";
+            echo "<th> Dátum akcie </th>";
+            echo "<th> Názov akcie </th>";
+            echo "<th> Meno </th>";
+            echo "<th> Priezvisko </th>";
             echo "<th> ID transakcie </th>";
-            echo "<th> Názov akcie </th>";        //double bracket is because of double quotes, single quotes wont work
-            echo "<th> Dátum akcie </th>";          
+
+                    //double bracket is because of double quotes, single quotes wont work
+                      
             echo "<th> Suma </th>";
             echo "<th> Vyfakturovaná práca </th>";
             echo "<th> Pridať na faktúru </th>";
@@ -33,14 +36,30 @@
                 $id_transakcie = $row['id_fin_den_firmy'];
                 $nazov_akcie = $row['nazov_akcie'];
                 $dat_akcie = $row['akcia_dat'];
+                $cislo_zamestnanca = $row['cislo_zamestnanca_id'];
+                //select meno zamestnanca
+                $query_meno = "SELECT Z.meno, Z.priezvisko 
+                FROM zamestnanci Z
+                WHERE Z.cislo_zamestnanca = {$cislo_zamestnanca}";
+                $select_meno = mysqli_query($connection, $query_meno);
+                while($riadok = mysqli_fetch_assoc($select_meno))
+                {
+                    $meno = $riadok['meno'];
+                    $priezvisko = $riadok['priezvisko'];
+                }
+
                 $suma = $row['suma'];
                 $typ_zaznamu = $row['typ_zaznamu'];
     
                 echo "<tr>";
-                echo "<td> {$id_transakcie} </td>";        
-                echo "<td> {$nazov_akcie} </td>";
-
                 echo "<td> {$dat_akcie} </td>";
+                echo "<td> {$nazov_akcie} </td>";
+                echo "<td> {$meno} </td>";
+                echo "<td> {$priezvisko} </td>";
+                echo "<td> {$id_transakcie} </td>";        
+                
+
+                
                 echo "<td> {$suma} </td>";
                 if($typ_zaznamu == "false")
                 {

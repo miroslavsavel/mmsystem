@@ -237,30 +237,116 @@ CREATE TABLE a01_wait_zamestnanci (
 );
 
 
+#--OLD
+-- CREATE TABLE fin_den_zam (
+--     id_fin_den_zam int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--     cislo_zamestnanca int,
+--     schvalene_vykazy_id int,
+--     meno varchar(50),
+--     priezvisko varchar(50),
+--     suma DECIMAL(6,3),
+--     typ_zaznamu ENUM('false', 'true') NOT NULL DEFAULT 'false',
+--     dat_ins DATETIME,
+--     pozn varchar(200),
+--     FOREIGN KEY (cislo_zamestnanca) REFERENCES zamestnanci(cislo_zamestnanca),
+--     FOREIGN KEY (schvalene_vykazy_id) REFERENCES schvalene_vykazy(schvalene_vykazy_id)
+-- );
 
-CREATE TABLE fin_den_zam (
-    id_fin_den_zam int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    cislo_zamestnanca int,
-    schvalene_vykazy_id int,
-    meno varchar(50),
-    priezvisko varchar(50),
-    suma DECIMAL(6,3),
-    typ_zaznamu ENUM('false', 'true') NOT NULL DEFAULT 'false',
-    dat_ins DATETIME,
-    pozn varchar(200),
-    FOREIGN KEY (cislo_zamestnanca) REFERENCES zamestnanci(cislo_zamestnanca),
-    FOREIGN KEY (schvalene_vykazy_id) REFERENCES schvalene_vykazy(schvalene_vykazy_id)
-);
-
-
+#--NEW financny dennik firmy
 CREATE TABLE fin_den_firmy (
     id_fin_den_firmy int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     firmy_id int,
     schvalene_vykazy_id int,
+    akcia_dat DATE,
+    cislo_zamestnanca_id int,
+    cas_od DATETIME,
+    cas_do DATETIME,
+    pocet_hodin DECIMAL(6,3),
+    hod_noc DECIMAL(6,3),
+    hod_sobota DECIMAL(6,3),
+    hod_nedela DECIMAL(6,3),
+    hod_sviatok DECIMAL(6,3),
+    hod_sobota_noc DECIMAL(6,3),
+    hod_nedela_noc DECIMAL(6,3),
+    hod_sviatok_noc DECIMAL(6,3),
+    hod_sobota_sviatok DECIMAL(6,3),
+    hod_nedela_sviatok DECIMAL(6,3),
+    hod_sobota_sviatok_noc DECIMAL(6,3),
+    hod_nedela_sviatok_noc DECIMAL(6,3),
+    fixna_odmena int,
+    taxi_vlak_ine DECIMAL(6,3),
+    km DECIMAL(6,3),
     suma DECIMAL(6,3),
     typ_zaznamu ENUM('false', 'true') NOT NULL DEFAULT 'false',
     dat_ins DATETIME,
     pozn varchar(200),
     FOREIGN KEY (firmy_id) REFERENCES firmy(firmy_id),
-    FOREIGN KEY (schvalene_vykazy_id) REFERENCES schvalene_vykazy(schvalene_vykazy_id)
+    FOREIGN KEY (schvalene_vykazy_id) REFERENCES schvalene_vykazy(schvalene_vykazy_id),
+    FOREIGN KEY (cislo_zamestnanca_id) REFERENCES zamestnanci(cislo_zamestnanca)
+);
+
+
+CREATE TABLE faktury (
+    id_faktury int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firmy_id int,
+    zakl_taxa int,
+    praca_noc int,
+    praca_sob int,
+    praca_ned int,
+    praca_svia int,
+    praca_sob_noc int,
+    praca_ned_noc int,
+    praca_svia_noc int,
+    praca_sob_svia int,
+    praca_ned_svia int,
+    praca_sob_svia_noc int,
+    praca_ned_svia_noc int,
+    sum_pocet_hod DECIMAL(6,2),
+    sum_noc DECIMAL(6,2),
+    sum_sob DECIMAL(6,2),
+    sum_ned DECIMAL(6,2),
+    sum_svia DECIMAL(6,2),
+    sum_sob_noc DECIMAL(6,2),
+    sum_ned_noc DECIMAL(6,2),
+    sum_svia_noc DECIMAL(6,2),
+    sum_sob_svia DECIMAL(6,2),
+    sum_ned_svia DECIMAL(6,2),
+    sum_sob_svia_noc DECIMAL(6,2),
+    sum_ned_svia_noc DECIMAL(6,2),
+    sum_pocet_km DECIMAL(6,2),
+    sum_pausal DECIMAL(6,2),
+    sum_taxi_vlak_ine DECIMAL(6,2),
+    eur_hod_celkom DECIMAL(6,2),
+    eur_pausal DECIMAL(6,2),
+    eur_bez_dph DECIMAL(6,2),
+    eur_dph DECIMAL(6,2),
+    eur_s_dph DECIMAL(6,2),
+    FOREIGN KEY (firmy_id) REFERENCES firmy(firmy_id)
+);
+
+CREATE TABLE faktury_zamestnanci (
+    id_faktury_zamestnanci int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_fin_den_firmy int,
+    id_faktury int,
+    nazov_akcie varchar(100),
+    meno varchar(50),
+    priezvisko varchar(50),
+    cas_od DATETIME,
+    cas_do DATETIME,
+    pocet_hodin DECIMAL(6,2),
+    hod_noc DECIMAL(6,2),
+    hod_sob DECIMAL(6,2),
+    hod_ned DECIMAL(6,2),
+    hod_svia DECIMAL(6,2),
+    hod_sob_noc DECIMAL(6,2),
+    hod_ned_noc DECIMAL(6,2),
+    hod_svia_noc DECIMAL(6,2),
+    hod_sob_svia DECIMAL(6,2),
+    hod_ned_svia DECIMAL(6,2),
+    hod_sob_svia_noc DECIMAL(6,2),
+    hod_ned_svia_noc DECIMAL(6,2),
+    km DECIMAL(6,2),
+    pausal DECIMAL(6,2),
+    taxi_vlak_ine DECIMAL(6,2),
+    FOREIGN KEY (id_faktury) REFERENCES faktury(id_faktury)
 );

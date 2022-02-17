@@ -1,13 +1,22 @@
-# do fin den firmy pridaj stlpce
-ID zamestnanca
-Datum akcie vo formate date - aby sa dalo lahko zoradovat
-- zmenit aj insert v kode kde sa robi
+# zobrazit vsetky vytvorene faktury
+- urob tabulku kde bude - firma, faktura OD, faktura DO
+    zoradene aby bol prvy najnovsi/najvyssi datum OD
+- gombik EXPORT DO PDF
+- po kliknuti na gombik sa vygeneruje PDF faktury
 
-# vytvorenie faktury
-najprv sa ulozi do tabulky 
-create table faktury
-faktura od do
-insert
+
+------------------------------------
+
+# pausalovych zapisovat
+
+# vyplaty
+- kopiruje faktury
+
+# osetrit moznost ked nevyberie ani jeden zaznam na fakturu z fin_den_firmy
+- javascriptova funkcia ktora to pozrie
+
+# editacia schvaleneho vykazu !!!! - ak bude chciet dano dopisat zamesnancov na vykaz
+- treba urobit delete zaznamov v schvalenom vykaze aj v schvalene vykazy zamestnanci
 
 # do fin_den_firmy.php
 pridaj aj meno zamestnanca ktoreho sa dana transakcia tyka
@@ -26,8 +35,6 @@ functions_vykazy.php
 # treba pomenit SQL prikazy vo funkcii na prepare kvoli SQL injekcii
 fnc_schvalenie_vykazu.php 
 
-# insert fin den firmy
--navrhni tabulku fin_den_firmy
--pridaj stlpec do tabule firmy pre koef kilometrov pre zamestnanca?
+
 
 

@@ -56,7 +56,8 @@ BEGIN
         F.firmy_id = vybrane_id_firmy;   #--tuto je chyba!!!!! ma problem s tymto nacitanim do obsahu premennych
         #--vyskusaj to s napevno zadanym 111 ako select
         
-
+    #-------------------------SELECT cislo_zamestnanca na danom vykaze
+    
     #--test
     #--SET koef_platu := 3.000;
     #--SET prip_sobota := 1.000;
@@ -97,7 +98,8 @@ BEGIN
     SET suma_prip_nedela_sviatok_noc := NEW.hod_nedela_sviatok_noc * (prip_nedela + prip_sviatok + prip_noc);                            
 
     #--doplneny o pocet_hod*koef
-    SET suma := suma_std_hod + suma_prip_noc + suma_prip_sobota + suma_prip_nedela + suma_prip_sviatok + 
+    SET suma := NEW.pocet_hodin*koef_taxa +
+                    suma_std_hod + suma_prip_noc + suma_prip_sobota + suma_prip_nedela + suma_prip_sviatok + 
                     suma_prip_sobota_noc + suma_prip_nedela_noc + suma_prip_sviatok_noc + suma_prip_sobota_sviatok +
                     suma_prip_nedela_sviatok + suma_prip_sobota_sviatok_noc + suma_prip_nedela_sviatok_noc;
     SET pozn := 'Vygenerované zo schváleného výkazu';

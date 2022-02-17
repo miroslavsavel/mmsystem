@@ -13,7 +13,15 @@ BEGIN
     DECLARE prip_nedela DECIMAL(6,3);
     DECLARE prip_noc DECIMAL(6,3);
     DECLARE prip_sviatok DECIMAL(6,3);
+    #--firmy_id
     DECLARE vybrane_id_firmy INT;
+    #--cislo_zamestnanca_id
+    DECLARE cislo_zamestnanca_id INT;
+    #--dat_akcie str50
+    DECLARE datum_akcie DATE;
+    #--taxi_vlak_ine
+    DECLARE taxi_vlak_ine DECIMAL(6,3);
+    DECLARE km DECIMAL(6,3);
 
     DECLARE suma DECIMAL(6,3);
     DECLARE dat_ins DATETIME;
@@ -56,6 +64,23 @@ BEGIN
         F.firmy_id = vybrane_id_firmy;   #--tuto je chyba!!!!! ma problem s tymto nacitanim do obsahu premennych
         #--vyskusaj to s napevno zadanym 111 ako select
         
+    #--cislo_zamestnanca_id je uz v NEW.cislo_zamestnanca_id
+
+    #--datum akcie
+    SELECT DISTINCT
+        S.akcia_dat
+    INTO 
+        datum_akcie
+    FROM 
+        schvalene_vykazy S
+    WHERE  
+        S.schvalene_vykazy_id = NEW.schvalene_vykazy_id;
+
+    #--cas_od a cas_do 
+
+    #--taxi_vlak_ine zatial nastavim na 0
+    SET taxi_vlak_ine := 0;
+    SET km := 0;
 
     #--test
     #--SET koef_platu := 3.000;
@@ -109,7 +134,26 @@ BEGIN
                 (
                     id_fin_den_firmy,
                     firmy_id, 
-                    schvalene_vykazy_id,  
+                    schvalene_vykazy_id,
+                    akcia_dat,
+                    cislo_zamestnanca_id,
+                    cas_od,
+                    cas_do,
+                    pocet_hodin,
+                    hod_noc,
+                    hod_sobota,
+                    hod_nedela,
+                    hod_sviatok,
+                    hod_sobota_noc,
+                    hod_nedela_noc,
+                    hod_sviatok_noc,
+                    hod_sobota_sviatok,
+                    hod_nedela_sviatok,
+                    hod_sobota_sviatok_noc,
+                    hod_nedela_sviatok_noc,
+                    fixna_odmena,
+                    taxi_vlak_ine,
+                    km,
                     suma, 
                     typ_zaznamu,
                     dat_ins,
@@ -119,7 +163,26 @@ BEGIN
                 (
                     NULL,
                     vybrane_id_firmy, 
-                    NEW.schvalene_vykazy_id, 
+                    NEW.schvalene_vykazy_id,
+                    datum_akcie,
+                    NEW.cislo_zamestnanca_id,
+                    NEW.cas_od,
+                    NEW.cas_do,
+                    NEW.pocet_hodin,
+                    NEW.hod_noc,
+                    NEW.hod_sobota,
+                    NEW.hod_nedela,
+                    NEW.hod_sviatok,
+                    NEW.hod_sobota_noc,
+                    NEW.hod_nedela_noc,
+                    NEW.hod_sviatok_noc,
+                    NEW.hod_sobota_sviatok,
+                    NEW.hod_nedela_sviatok,
+                    NEW.hod_sobota_sviatok_noc,
+                    NEW.hod_nedela_sviatok_noc,
+                    NEW.fixna_odmena,
+                    taxi_vlak_ine,
+                    km,
                     suma,
                     true,
                     dat_ins, 
